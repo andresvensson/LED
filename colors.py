@@ -3,7 +3,7 @@ def red():
         return(255, 0, 0)        
 
 def green():
-        return(0, 255, 0);
+        return(0, 255, 0)
         
 def blue():
         return(0, 0, 255)
