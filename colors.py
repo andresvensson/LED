@@ -34,3 +34,9 @@ def teal():
 
 def navy():
         led.colorCode(0, 0, 128)
+
+def Yellow():
+        return(255, 255, 0)
+
+
+
