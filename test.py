@@ -6,7 +6,7 @@ set()
 
 
 # Problem
-# This so work but I want to something that makes me change color with the line: 
+# This does work but I want to change color with the line: 
 # set(Yellow)
-
+# How do I do that?
 
