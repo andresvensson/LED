@@ -1,9 +1,8 @@
-def set():
-        r, g, b = colors.Yellow()
-        led.colorCode(r, g, b) 
+def set(rgb): 
+        #r, g, b = colors.Yellow()
+        led.colorCode(rgb[0], rgb[1], rgb [2]) 
 
-set()
-
+set(colors.Yellow())
 
 # Problem
 # This does work but I want to change color with the line: 
