@@ -11,16 +11,17 @@ OFF = 0
 STEP = 1
 pi = pigpio.pi()
 
-#r = 0
-#g = 0
-#b = 255
-
-
+# Set and read pin
 def setLights(pin, brightness):
         realBrightness = int(int(brightness) * (float(bright) / 255.0))
         pi.set_PWM_dutycycle(pin, realBrightness)
 
+def readLights(pin):
+        value = pi.get_PWM_dutycycle(pin)
+        realValue = int(value)
+        return realValue
 
+# Code
 def lightsOff():
         setLights(RED_PIN, 0)
         setLights(GREEN_PIN, 0)
@@ -39,9 +40,9 @@ def fade(rgb):
         ng = rgb[1]
         nb = rgb[2]
 
-        r = 128
-        g = 129
-        b = 130
+        r = readLights(RED_PIN)
+        g = readLights(GREEN_PIN)
+        b = readLights(BLUE_PIN)
         print (r, g, b)
         print (nr, ng, nb)
 
@@ -56,7 +57,7 @@ def fade(rgb):
                         print (r, g, b)
                         setLights(RED_PIN, r)
 
-                elif nr == r and ng > g and nb == n:
+                elif nr == r and ng > g and nb == b:
                         g = g + 1
                         print (r, g, b)
                         setLights(GREEN_PIN, g)
@@ -66,7 +67,7 @@ def fade(rgb):
                         print (r, g, b)
                         setLights(GREEN_PIN, g)
 
-                elif nr == r and ng == g and nb > n:
+                elif nr == r and ng == g and nb > b:
                         b = b + 1
                         print (r, g, b)
                         setLights(BLUE_PIN, b)
