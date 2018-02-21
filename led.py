@@ -48,6 +48,7 @@ def fade(rgb):
         print (r, g, b)
         print (nr, ng, nb)
 
+        # the fade part
         while nr != r or ng != g or nb != b:
                 if nr > r and ng == g and nb == b:
                         r = r + 1
