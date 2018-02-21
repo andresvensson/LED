@@ -36,10 +36,12 @@ def set(rgb):
         colorCode(rgb[0], rgb[1], rgb[2])
 
 def fade(rgb):
+        # new color
         nr = rgb[0]
         ng = rgb[1]
         nb = rgb[2]
 
+        # current color
         r = readLights(RED_PIN)
         g = readLights(GREEN_PIN)
         b = readLights(BLUE_PIN)
