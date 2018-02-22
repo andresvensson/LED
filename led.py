@@ -17,7 +17,6 @@ def start():
         fade(colors.green())
         set(colors.blue())
 
-
 # Set and read pin
 def setLights(pin, brightness):
         realBrightness = int(int(brightness) * (float(bright) / 255.0))
@@ -106,7 +105,6 @@ def blink(count):
         else:
                 set(colors.blue())
                 time.sleep(1)
-
 
 def main_led():
         step = 1
