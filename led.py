@@ -51,8 +51,8 @@ def fade(rgb):
         r = readLights(RED_PIN)
         g = readLights(GREEN_PIN)
         b = readLights(BLUE_PIN)
-        print (r, g, b)
-        print (nr, ng, nb)
+        print ("Current color", r, g, b)
+        print ("Desired color", nr, ng, nb)
 
         while nr != r or ng != g or nb != b:
                 if nr > r:
