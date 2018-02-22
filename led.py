@@ -11,6 +11,13 @@ OFF = 0
 STEP = 1
 pi = pigpio.pi()
 
+# This will run @ start
+def start():
+        blink(7)
+        fade(colors.green())
+        set(colors.blue())
+
+
 # Set and read pin
 def setLights(pin, brightness):
         realBrightness = int(int(brightness) * (float(bright) / 255.0))
@@ -36,55 +43,58 @@ def set(rgb):
         colorCode(rgb[0], rgb[1], rgb[2])
 
 def fade(rgb):
-        # new color
         nr = rgb[0]
         ng = rgb[1]
         nb = rgb[2]
 
-        # current color
+        t = 0.01
+
         r = readLights(RED_PIN)
         g = readLights(GREEN_PIN)
         b = readLights(BLUE_PIN)
         print (r, g, b)
         print (nr, ng, nb)
 
-        # the fade part
         while nr != r or ng != g or nb != b:
-                if nr > r and ng == g and nb == b:
+                if nr > r:
                         r = r + 1
+                        time.sleep(t)
                         print (r, g, b)
                         setLights(RED_PIN, r)
 
-                elif nr < r and ng == g and nb == b:
+                if nr < r:
                         r = r - 1
+                        time.sleep(t)
                         print (r, g, b)
                         setLights(RED_PIN, r)
 
-                elif nr == r and ng > g and nb == b:
+                if ng > g:
                         g = g + 1
+                        time.sleep(t)
                         print (r, g, b)
                         setLights(GREEN_PIN, g)
 
-                elif nr == r and ng < g and nb == b:
+                if ng < g:
                         g = g - 1
+                        time.sleep(t)
                         print (r, g, b)
                         setLights(GREEN_PIN, g)
 
-                elif nr == r and ng == g and nb > b:
-                        b = b + 1
+                if nb > b:
+                        nb = b + 1
+                        time.sleep(t)
                         print (r, g, b)
                         setLights(BLUE_PIN, b)
 
-                elif nr == r and ng == g and nb < b:
+                if nb < b:
                         b = b - 1
+                        time.sleep(t)
                         print (r, g, b)
                         setLights(BLUE_PIN, b)
-
-def start():
-        #blink(7)
-        fade(colors.green())
-        set(colors.blue())
-
+        else:
+                setLights(RED_PIN, r)
+                setLights(GREEN_PIN, g)
+                setLights(BLUE_PIN, b)
 
 def blink(count):
         while count > 0:
@@ -94,7 +104,7 @@ def blink(count):
                 time.sleep(0.1)
                 count = count - 1
         else:
-                set(colors.green())
+                set(colors.blue())
                 time.sleep(1)
 
 
