@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-import pigpio, time
+import pigpio
+import time
 import colors
 # Constants
 RED_PIN = 19
