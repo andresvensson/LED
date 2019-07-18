@@ -3,10 +3,11 @@ import pigpio
 import time
 from typing import Dict, Tuple
 
-STEP: int = 1
-BRIGHT: int = 255
+STEP: int = 1 # Remove this?
+
 
 class LedController:
+    BRIGHT: int = 255
     color_codes: Dict[str, Tuple[int, int, int]] = {
         "Red": (255, 0, 0),
         "Blue": (0, 255, 0),
@@ -24,7 +25,7 @@ class LedController:
         self.blue_pin: int = blue_pin
 
     def set_lights(self, pin: int, brightness: int):
-            realBrightness = int(brightness * (float(BRIGHT) / 255.0))
+            realBrightness = int(brightness * (float(self.BRIGHT) / 255.0))
             self.pi.set_PWM_dutycycle(pin, realBrightness)
 
     def lights_off(self):
