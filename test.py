@@ -1,11 +1,14 @@
-def set(rgb): 
-        #r, g, b = colors.Yellow()
-        led.colorCode(rgb[0], rgb[1], rgb [2]) 
+#!/usr/bin/python
+import pigpio
+import time
+from LedController import LedController
 
-set(colors.Yellow())
+time.sleep(2)
 
-# Problem
-# This does work but I want to change color with the line: 
-# set(Yellow)
-# How do I do that?
+#loop.blue()
+lc = LedController(red_pin=0, green_pin=0, blue_pin=0)
+lc.lights_off()
+lc.cycle()
+lc.lights_off()
 
+#time.sleep(2)
