@@ -28,11 +28,12 @@ def colorCode(r, g, b):
 
 def updateColor(color, step):
         color += step
-
-def color(x):
-        #colorCode = color
+"""
+* ERROR HERE * 
+def color(x): <-- when you define a function
+        #colorCode = color <-- you have to have a statement indented below it.
         #colorCode(colors.(x))
-
+"""
 def cycle():
         lightsOff()
         time.sleep(2)
