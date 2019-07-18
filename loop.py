@@ -1,87 +1,53 @@
 #!/usr/bin/python
+import pigpio
+import time
+from typing import Dict, Tuple
 
-import pigpio, time
+STEP: int = 1
+BRIGHT: int = 255
 
-step = 1
+class LedController:
+    color_codes: Dict[str, Tuple[int, int, int]] = {
+        "Red": (255, 0, 0),
+        "Blue": (0, 255, 0),
+        "Green":(0, 0, 255),
+        "Chocolate": (210, 105, 30),
+        "BlueViolet": (138, 43, 226),
+        "DodgerBlue": (30, 144, 255),
+        "CyanAqua": (0, 255, 255)    
+    }
 
-RED_PIN = 19
-GREEN_PIN = 26
-BLUE_PIN = 20
+    def __init__(self, red_pin: int, green_pin: int, blue_pin: int):
+        self.pi = pigpio.pi()
+        self.red_pin: int = red_pin
+        self.green_pin: int = green_pin
+        self.blue_pin: int = blue_pin
 
-bright = 255
-off = 0
+    def set_lights(self, pin: int, brightness: int):
+            realBrightness = int(brightness * (float(BRIGHT) / 255.0))
+            self.pi.set_PWM_dutycycle(pin, realBrightness)
 
-pi = pigpio.pi()
+    def lights_off(self):
+        self.set_color_code((0, 0, 0))
 
-
-def setLights(pin, brightness):
-        realBrightness = int(int(brightness) * (float(bright) / 255.0))
-        pi.set_PWM_dutycycle(pin, realBrightness)
-
-
-def red():
-        setLights(RED_PIN, 255)
-        setLights(GREEN_PIN, 0)
-        setLights(BLUE_PIN, 0)
-
-def green():
-        setLights(RED_PIN, 0)
-        setLights(GREEN_PIN, 255)
-        setLights(BLUE_PIN, 0)
-
-def blue():
-        setLights(RED_PIN, 0)
-        setLights(GREEN_PIN, 0)
-        setLights(BLUE_PIN, 255)
-
-def lightsOff():
-        setLights(RED_PIN, 0)
-        setLights(GREEN_PIN, 0)
-        setLights(BLUE_PIN, 0)
-
-def colorCode(r, g, b):
-        setLights(RED_PIN, r)
-        setLights(GREEN_PIN, g)
-        setLights(BLUE_PIN, b)
-
-def updateColor(color, step):
+    def set_color_code(self, rgb: Tuple[int, int, int]):
+            self.set_lights(self.red_pin, rgb[0])
+            self.set_lights(self.green_pin, rgb[1])
+            self.set_lights(self.blue_pin, rgb[2])
+    
+    @staticmethod
+    def update_color(color, step: int):
+        # Remove this?
         color += step
 
-
-def cycle():
-        lightsOff()
-        time.sleep(2)
-        red()
-        time.sleep(2)
-        green()
-        time.sleep(2)
-        blue()
+    def cycle(self):
+            self.lights_off()
+            for code in self.color_codes:
+                self.set_color_code(self.color_codes[code])
+                time.sleep(2)
 
 
-#cycle()
-time.sleep(2)
-
-#chocolate
-#colorCode(210,105,30)
-#time.sleep(2)
-
-#Blue violett
-#colorCode(138,43,226)
-#time.sleep(2)
-
-#dodger blue
-#colorCode(30,144,255)
-#time.sleep(2)
-
-#Cyan/aqua
-#colorCode(0,255,255)
-#time.sleep(2)
-
-
-cycle()
-time.sleep(2)
-
-
-pi.stop()
-
-__name__ == "__main__"
+if __name__ == "__main__":
+    led = LedController(red_pin=19, green_pin=26, blue_pin=20)
+    led.cycle()
+    led.pi.stop()
