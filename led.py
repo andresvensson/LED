@@ -21,10 +21,10 @@ def lightsOff():
         setLights(GREEN_PIN, 0)
         setLights(BLUE_PIN, 0)
 
-def colorCode(r, g, b):
-        setLights(RED_PIN, r)
-        setLights(GREEN_PIN, g)
-        setLights(BLUE_PIN, b)
+def colorCode(rgb):
+        setLights(RED_PIN, rgb[0])
+        setLights(GREEN_PIN, rgb[0])
+        setLights(BLUE_PIN, rgb[0])
 
 def updateColor(color, step):
         color += step
@@ -37,18 +37,20 @@ def color(x): <-- when you define a function
 def cycle():
         lightsOff()
         time.sleep(2)
-        color(red)
+        colorCode(colors.red())
         time.sleep(2)
-        color(green)
+        colorCode(colors.green())
         time.sleep(2)
-        color(blue)
+        colorCode(colors.blue())
 
 def main_led():
         step = 1
-        while True:
+        Run = 0
+        while Run < 10:
                 cycle()
                 time.sleep(2)
                 pi.stop()
+                Run += 1
 
 if __name__ == "__main__":
         main_led()
