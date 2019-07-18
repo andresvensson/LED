@@ -1,25 +1,22 @@
 
 def red():
-        return(255, 0, 0)        
+        return (255, 0, 0)        
 
 def green():
-        return(0, 255, 0)
+        return (0, 255, 0)
         
 def blue():
-        return(0, 0, 255)
+        return (0, 0, 255)
 
-                #chocolate
-        #colorCode(210,105,30)
-        #time.sleep(2)
+def chocolate():
+        return (210,105,30)
+        
+def blue_violett():
+        return (138,43,226)
+        
 
-        #Blue violett
-        #colorCode(138,43,226)
-        #time.sleep(2)
+def dodger_blue():
+        return (30,144,255)
 
-        #dodger blue
-        #colorCode(30,144,255)
-        #time.sleep(2)
-
-        #Cyan/aqua
-        #colorCode(0,255,255)
-        #time.sleep(2)
+def cyan_aqua():
+        return (0,255,255)
