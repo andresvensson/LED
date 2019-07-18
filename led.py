@@ -6,7 +6,7 @@ import colors
 RED_PIN = 19
 GREEN_PIN = 26
 BLUE_PIN = 20
-BRIGHT = 255
+bright = 255
 OFF = 0
 
 pi = pigpio.pi()
@@ -29,22 +29,25 @@ def colorCode(r, g, b):
 def updateColor(color, step):
         color += step
 
+def color(x):
+        #colorCode = color
+        #colorCode(colors.(x))
 
 def cycle():
         lightsOff()
         time.sleep(2)
-        red()
+        color(red)
         time.sleep(2)
-        green()
+        color(green)
         time.sleep(2)
-        blue()
+        color(blue)
 
-def main_loop():         
-        step = 1        
+def main_led():
+        step = 1
         while True:
                 cycle()
                 time.sleep(2)
-        pi.stop()
+                pi.stop()
 
 if __name__ == "__main__":
-        main_loop()
+        main_led()
